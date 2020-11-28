@@ -9,17 +9,17 @@ transform a python dict to a flat structure and back
 features:
 
 - 2-way transformation
- - from dict to flatten
- - from flaten to dict
+  - from dict to flatten
+  - from flaten to dict
 - supported types
- - bool
- - int
- - float
- - complex
- - list
- - set
- - tupel
- - dict 
+  - bool
+  - int
+  - float
+  - complex
+  - list
+  - set
+  - tupel
+  - dict 
 - support for nested heterogeneous types in list 
 - support for list in lists
 - no dependencies
