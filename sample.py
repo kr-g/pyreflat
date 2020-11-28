@@ -105,3 +105,19 @@ p(test_dic)
 print("equal?", test_dic == d)
 del test_dic["a"]
 print("equal?", test_dic == d)
+
+#
+# without converter and without nl in output 
+#
+
+with FlatFile("test.flt.txt", "w", converter=Convert) as f:
+    f.write(d)
+
+with FlatFile("test.flt.txt", converter=Convert) as f:
+    test_dic = f.read()
+
+p(test_dic)
+
+print("equal?", test_dic == d)
+del test_dic["a"]
+print("equal?", test_dic == d)
