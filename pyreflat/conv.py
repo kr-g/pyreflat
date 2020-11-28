@@ -1,7 +1,7 @@
 import binascii
 
 
-class Converter(object):
+class ConverterBase(object):
     def __init__(self):
         pass
 
@@ -12,7 +12,7 @@ class Converter(object):
         raise NotImplementedError
 
 
-class Convert(Converter):
+class Convert(ConverterBase):
     def encode(self, astr):
         return astr
 
@@ -20,7 +20,7 @@ class Convert(Converter):
         return astr
 
 
-class ConvertHex(Converter):
+class ConvertHex(ConverterBase):
     def encode(self, astr):
         return astr.encode().hex()
 
