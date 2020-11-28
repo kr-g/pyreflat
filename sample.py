@@ -127,7 +127,7 @@ del test_dic["a"]
 print("equal?", test_dic == d)
 
 #
-# without converter and without nl in output
+# with readable converter output and nl in output
 #
 
 os.remove("test.flt.txt")
