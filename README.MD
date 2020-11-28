@@ -2,7 +2,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
-# pyreflat - flatten python dict or json support
+# pyreflat - flatten python dict support
 
 transform a python dict to a flat structure and back
 
