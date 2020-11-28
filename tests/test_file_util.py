@@ -3,7 +3,7 @@ import tempfile
 import unittest
 
 from pyreflat import FlatFile
-from pyreflat.conv import ConvertHex
+from pyreflat.conv import Convert, ConvertHex, ConvertUTF8
 
 
 def get_test_data():
@@ -11,6 +11,8 @@ def get_test_data():
         "a": 1,
         "b": 2.1,
         "c": "hello world",
+        "c_nl": "hello\nworld\n",
+        "c_nl_tab": "hello\tworld\n",
         "d": {
             "z": 100,
             "y": 100.0,
@@ -83,6 +85,32 @@ class Flatten_File_TestCase(unittest.TestCase):
             f.write(test_dict)
 
         with FlatFile(fnam, converter=ConvertHex) as f:
+            dic = f.read()
+
+        print(dic)
+        os.remove(fnam)
+
+        self.maxDiff = None
+
+        self.assertEqual(test_dict, dic)
+        del dic["a"]
+
+        self.assertNotEqual(test_dict, dic)
+
+    def test_3(self):
+
+        temp_path = tempfile.gettempdir()
+        temp_fnam = tempfile.gettempprefix() + "_flat_test.txt"
+        fnam = os.path.join(temp_path, temp_fnam)
+
+        print("fnam=", fnam)
+
+        test_dict = self.dic_data
+
+        with FlatFile(fnam, "w", converter=ConvertUTF8) as f:
+            f.write(test_dict)
+
+        with FlatFile(fnam, converter=ConvertUTF8) as f:
             dic = f.read()
 
         print(dic)

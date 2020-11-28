@@ -1,10 +1,10 @@
 import io
-
+import os
 import json
 
 from pyreflat import DictTokenizer, DictIterpreter, FlatWriter, FlatReader
 from pyreflat import FlatFile
-from pyreflat.conv import Convert, ConvertHex
+from pyreflat.conv import Convert, ConvertHex, ConvertUTF8
 
 
 def p(dic):
@@ -94,6 +94,8 @@ p(r)
 
 # do more comfy
 
+os.remove("test.flt.txt")
+
 with FlatFile("test.flt.txt", "w", converter=ConvertHex) as f:
     f.write(d)
 
@@ -107,13 +109,33 @@ del test_dic["a"]
 print("equal?", test_dic == d)
 
 #
-# without converter and without nl in output 
+# without converter and without nl in output
 #
 
+os.remove("test.flt.txt")
+
 with FlatFile("test.flt.txt", "w", converter=Convert) as f:
-    f.write(d)
+    f.write(d, write_nl=False)
 
 with FlatFile("test.flt.txt", converter=Convert) as f:
+    test_dic = f.read(split_lines=False)
+
+p(test_dic)
+
+print("equal?", test_dic == d)
+del test_dic["a"]
+print("equal?", test_dic == d)
+
+#
+# without converter and without nl in output
+#
+
+os.remove("test.flt.txt")
+
+with FlatFile("test.flt.txt", "w", converter=ConvertUTF8) as f:
+    f.write(d, write_nl=True)
+
+with FlatFile("test.flt.txt", converter=ConvertUTF8) as f:
     test_dic = f.read()
 
 p(test_dic)

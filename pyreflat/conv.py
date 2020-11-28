@@ -1,4 +1,5 @@
 import binascii
+import ast
 
 
 class ConverterBase(object):
@@ -18,6 +19,14 @@ class Convert(ConverterBase):
 
     def decode(self, astr):
         return astr
+
+
+class ConvertUTF8(ConverterBase):
+    def encode(self, astr):
+        return astr.encode("unicode-escape").decode()
+
+    def decode(self, astr):
+        return astr.encode().decode("unicode-escape")
 
 
 class ConvertHex(ConverterBase):
