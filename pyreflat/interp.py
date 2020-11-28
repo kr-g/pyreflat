@@ -1,3 +1,6 @@
+import binascii
+
+from .conv import Convert
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
 
@@ -5,6 +8,9 @@ class Command(object):
     def __init__(self, interp, token):
         self.interp = interp
         self.token = token
+
+    def _get_conv(self):
+        return self.interp._converter()
 
     def run(self, env):
         raise NotImplementedError
@@ -22,6 +28,7 @@ class TerminalValueTypeCmd(Command):
         env = cmd.run(env)
 
         if self.token.val == "str":
+            env = self._get_conv().decode(str(env))
             return env
 
         env = env.strip()
@@ -81,10 +88,11 @@ class KeyCmd(Command):
 
 
 class DictIterpreter(object):
-    def __init__(self):
+    def __init__(self, converter=Convert):
         self.reset()
         self._stack = list()
         self._map = {}
+        self._converter = converter
         self._set_defaults()
 
     def _set_defaults(self):

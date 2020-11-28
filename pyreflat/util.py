@@ -1,6 +1,7 @@
 from .core import DictTokenizer
 from .interp import DictIterpreter
 from .flatter import FlatWriter, FlatReader
+from .conv import Convert
 
 
 class FileAlreadyOpenError(Exception):
@@ -8,10 +9,11 @@ class FileAlreadyOpenError(Exception):
 
 
 class FlatFile(object):
-    def __init__(self, fnam, mode="r"):
+    def __init__(self, fnam, mode="r", converter=Convert):
         self._fnam = fnam
         self._mode = mode
         self._fd = None
+        self._convert = converter
 
     def open(self):
         if self._fd:
@@ -23,17 +25,17 @@ class FlatFile(object):
             self._fd.close()
             self._fd = None
 
-    def write(self, dic):
-        toknizr = DictTokenizer(emitType=True)
+    def write(self, dic, write_nl=False):
+        toknizr = DictTokenizer(emitType=True, converter=self._convert)
         toknizr.from_dict(dic)
-        writer = FlatWriter(toknizr)
+        writer = FlatWriter(toknizr, write_nl=write_nl)
         writer.write(file=self._fd)
 
     def read(self):
         content = self._fd.read()
         reader = FlatReader()
-        ipret = DictIterpreter()
-        ipret.run_all(reader.emit_from_i(content.splitlines()))
+        ipret = DictIterpreter(converter=self._convert)
+        ipret.run_all(reader.emit_from(content))
         return ipret.result()
 
     def __enter__(self):

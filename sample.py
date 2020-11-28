@@ -4,6 +4,7 @@ import json
 
 from pyreflat import DictTokenizer, DictIterpreter, FlatWriter, FlatReader
 from pyreflat import FlatFile
+from pyreflat.conv import Convert, ConvertHex
 
 
 def p(dic):
@@ -18,6 +19,7 @@ d = {
     "a": 1,
     "b": 2.0,
     "c": "hello world",
+    "c_nl": "hello\nworld\n",
     "d": {
         "z": 100,
         "y": 100.0,
@@ -39,14 +41,14 @@ d = {
     "done": True,
 }
 
-toknizr = DictTokenizer(emitType=True)
+toknizr = DictTokenizer(emitType=True, converter=ConvertHex)
 toknizr.from_dict(d)
 
 alltokens = list(toknizr)  # iterator result as list
 
 fltwr = FlatWriter(
     toknizr,  # iterable, or use alltokens here as parameter
-    write_nl=True,  # write nl is the default behaviour
+    write_nl=False,  # write nl is the default behaviour
 )
 
 buf = io.StringIO()
@@ -55,13 +57,11 @@ fltwr.write(file=buf)
 content = buf.getvalue()
 
 fltrd = FlatReader()
-ipret = DictIterpreter()
+ipret = DictIterpreter(converter=ConvertHex)
 
 # read also next example below
-lines = content.splitlines()
-for line in lines:
-    for token in fltrd.emit_from(line):
-        ipret.run(token)
+for token in fltrd.emit_from(content):
+    ipret.run(token)
 
 r = ipret.result()  # this will not reset the internal state
 p(r)
@@ -87,21 +87,21 @@ r = ipret.result()
 p(r)
 
 # emit from iterator
-ipret.run_all(fltrd.emit_from_i(content.splitlines()))
+ipret.run_all(fltrd.emit_from(content))
 
 r = ipret.result()
 p(r)
 
 # do more comfy
 
-with FlatFile("test.flt.txt", "w") as f:
+with FlatFile("test.flt.txt", "w", converter=ConvertHex) as f:
     f.write(d)
 
-with FlatFile("test.flt.txt") as f:
-    dic = f.read()
+with FlatFile("test.flt.txt", converter=ConvertHex) as f:
+    test_dic = f.read()
 
-p(dic)
+p(test_dic)
 
-print("equal?", d == dic)
-del d["a"]
-print("equal?", d == dic)
+print("equal?", test_dic == d)
+del test_dic["a"]
+print("equal?", test_dic == d)

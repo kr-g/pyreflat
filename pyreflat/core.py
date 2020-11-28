@@ -1,10 +1,14 @@
+import binascii
+
+from .conv import Convert
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
 
 class DictTokenizer(object):
-    def __init__(self, emitType=True):
+    def __init__(self, emitType=True, converter=Convert):
         self._dic = {}
         self.emitType = emitType
+        self._converter = converter
 
     def from_dict(self, dic):
         self._dic = dic
@@ -39,7 +43,10 @@ class DictTokenizer(object):
         yield from stack
         if self.emitType:
             yield TerminalValueType(val.__class__.__name__)
-        yield TerminalValue(val)
+        if type(val) == str:
+            yield TerminalValue(self._converter().encode(str(val)))
+        else:
+            yield TerminalValue(val)
 
     def _it_list(self, el, stack):
         for i, val in enumerate(el):
