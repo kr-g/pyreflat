@@ -30,9 +30,9 @@ features:
 
 refer to [`sample.py`](https://github.com/kr-g/pyreflat/blob/main/sample.py)
 
-code:
+code: 
 
-    from pyreflat import FlatFile
+    from pyreflat import FlatFile # new in version v0.0.2
 
     fnam = "test-file.txt"
     test_dict = { "a": 1 }
