@@ -1,6 +1,12 @@
 
 # Changelog
 
+## next release v0.0.2
+
+- added `FlatFile` for easy writing and reading
+- 
+
+
 ## release v0.0.1
 
 - first release

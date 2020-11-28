@@ -30,6 +30,19 @@ features:
 
 refer to [`sample.py`](https://github.com/kr-g/pyreflat/blob/main/sample.py)
 
+code:
+
+    from pyreflat import FlatFile
+
+    fnam = "test-file.txt"
+    test_dict = { "a": 1 }
+
+    with FlatFile(fnam, "w") as f:
+        f.write(test_dict)
+
+    with FlatFile(fnam) as f:
+        dic = f.read()
+
 
 # how it works
 

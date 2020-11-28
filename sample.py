@@ -3,6 +3,7 @@ import io
 import json
 
 from pyreflat import DictTokenizer, DictIterpreter, FlatWriter, FlatReader
+from pyreflat import FlatFile
 
 
 def p(dic):
@@ -90,3 +91,17 @@ ipret.run_all(fltrd.emit_from_i(content.splitlines()))
 
 r = ipret.result()
 p(r)
+
+# do more comfy
+
+with FlatFile("test.flt.txt", "w") as f:
+    f.write(d)
+
+with FlatFile("test.flt.txt") as f:
+    dic = f.read()
+
+p(dic)
+
+print("equal?", d == dic)
+del d["a"]
+print("equal?", d == dic)

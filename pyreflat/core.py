@@ -23,17 +23,23 @@ class DictTokenizer(object):
 
     def _it(self, el, stack):
         for key, val in el.items():
+
             stack.append(Key(key))
+
             if type(val) == dict:
                 yield from self._it(val, stack)
             elif type(val) in [list, set, tuple]:
                 yield from self._it_list(val, stack)
             else:
-                yield from stack
-                if self.emitType:
-                    yield TerminalValueType(val.__class__.__name__)
-                yield TerminalValue(val)
+                yield from self._y_terminal(stack, val)
+
             stack.pop()
+
+    def _y_terminal(self, stack, val):
+        yield from stack
+        if self.emitType:
+            yield TerminalValueType(val.__class__.__name__)
+        yield TerminalValue(val)
 
     def _it_list(self, el, stack):
         for i, val in enumerate(el):
@@ -50,8 +56,6 @@ class DictTokenizer(object):
             elif type(val) in [list, set, tuple]:
                 yield from self._it_list(val, stack)
             else:
-                yield from stack
-                if self.emitType:
-                    yield TerminalValueType(val.__class__.__name__)
-                yield TerminalValue(val)
+                yield from self._y_terminal(stack, val)
+
             stack.pop()
