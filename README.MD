@@ -15,6 +15,7 @@ features:
  - bool
  - int
  - float
+ - complex
  - list
  - set
  - tupel
