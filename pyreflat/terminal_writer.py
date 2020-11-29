@@ -31,12 +31,15 @@ class TerminalWriter(object):
 
         for tokens in self._flt:
             path, val = tokens
+            ## todo refactor
+            # for will never executed
             for pr in path:
                 if type(pr) in self._map:
                     self._map[type(pr)].write(pr, output)
                 else:
                     # only write terminal values out
                     pass
+            ## end-of todo
             self._map[type(val)].write(val, output)
 
         return output
