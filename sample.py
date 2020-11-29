@@ -93,8 +93,10 @@ r = ipret.result()
 p(r)
 
 # do more comfy
-
-os.remove("test.flt.txt")
+try:
+    os.remove("test.flt.txt")
+except:
+    pass
 
 with FlatFile("test.flt.txt", "w", converter=ConvertHex) as f:
     f.write(d)
