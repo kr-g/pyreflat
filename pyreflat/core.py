@@ -1,5 +1,3 @@
-import binascii
-
 from .conv import Convert
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
