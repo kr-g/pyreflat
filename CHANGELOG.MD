@@ -4,7 +4,7 @@
 
 ## next release v0.0.3
 
-- added `TerminalWriter` method for creating a list with all terminal values only (1-way transformation)
+- added `TerminalWriter` class for creating a list with all terminal values only (1-way transformation)
 - 
 
 
