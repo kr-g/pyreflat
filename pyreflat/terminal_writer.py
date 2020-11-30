@@ -1,5 +1,3 @@
-import sys
-
 from .tokens import TerminalValue
 
 
@@ -31,7 +29,7 @@ class TerminalWriter(object):
 
         for tokens in self._flt:
             path, val = tokens
-            ## todo refactor
+            # todo refactor ?
             # for will never executed
             for pr in path:
                 if type(pr) in self._map:
@@ -39,7 +37,7 @@ class TerminalWriter(object):
                 else:
                     # only write terminal values out
                     pass
-            ## end-of todo
+            # end-of todo
             self._map[type(val)].write(val, output)
 
         return output

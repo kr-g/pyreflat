@@ -1,6 +1,4 @@
-import sys
-
-from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
+from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValue
 
 
 class Writer(object):

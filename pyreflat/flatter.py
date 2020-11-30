@@ -78,7 +78,7 @@ class FlatReader(object):
     def emit_from(self, line):
         while len(line) > 0:
             found = False
-            for k, trd in self._map.items():
+            for k, trd in self._greedy_token_safe_i():
                 r = self._look_ahead(line, trd._decr)
                 if r:
                     found = True
@@ -88,6 +88,9 @@ class FlatReader(object):
                     break
             if not found:
                 raise Exception("unknown token", line[0:10] + "...")
+
+    def _greedy_token_safe_i(self):
+        return reversed(sorted(self._map.items(), key=lambda x: len(x[0])))
 
     def emit_from_i(self, content):
         for line in content:
@@ -100,7 +103,7 @@ class FlatReader(object):
     def _get_val(self, line):
         pos = 0
         while pos < len(line):
-            for k, trd in self._map.items():
+            for k, trd in self._greedy_token_safe_i():
                 if line[pos:].startswith(trd._decr):
                     return line[:pos], line[pos:]
             pos += 1
