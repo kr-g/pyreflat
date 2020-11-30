@@ -63,6 +63,7 @@ class FlatReader(object):
     def __init__(self):
         self._map = {}
         self._set_defaults()
+        self._tokens = list(self._greedy_token_safe_i())
 
     def _set_defaults(self):
         self.set_reader(Reader(KEY_ID, Key))
@@ -78,7 +79,7 @@ class FlatReader(object):
     def emit_from(self, line):
         while len(line) > 0:
             found = False
-            for k, trd in self._greedy_token_safe_i():
+            for k, trd in self._tokens:
                 r = self._look_ahead(line, trd._decr)
                 if r:
                     found = True
@@ -103,7 +104,7 @@ class FlatReader(object):
     def _get_val(self, line):
         pos = 0
         while pos < len(line):
-            for k, trd in self._greedy_token_safe_i():
+            for k, trd in self._tokens:
                 if line[pos:].startswith(trd._decr):
                     return line[:pos], line[pos:]
             pos += 1
