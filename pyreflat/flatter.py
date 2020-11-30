@@ -73,6 +73,9 @@ class FlatReader(object):
         self.set_reader(Reader(TERMINAL_VALUE_ID, TerminalValue))
         self.set_reader(Reader(TERMINAL_VALUE_TYPE_ID, TerminalValueType))
 
+    def _greedy_token_safe_i(self):
+        return reversed(sorted(self._map.items(), key=lambda x: len(x[0])))
+
     def set_reader(self, reader):
         self._map[reader._decr] = reader
 
@@ -89,9 +92,6 @@ class FlatReader(object):
                     break
             if not found:
                 raise Exception("unknown token", line[0:10] + "...")
-
-    def _greedy_token_safe_i(self):
-        return reversed(sorted(self._map.items(), key=lambda x: len(x[0])))
 
     def emit_from_i(self, content):
         for line in content:
