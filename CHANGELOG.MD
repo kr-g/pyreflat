@@ -6,7 +6,7 @@
 
 - added `TerminalWriter` class for creating a list with all terminal values only (1-way transformation)
 - added `AnynomusPathWriter` class for creating a list with tupel( path, val ) pairs, where path is stripped 
- off any index information for latter seaching on a more abstract level
+ off any index information for latter seaching on a more abstract level (1-way transformation)
 - 
 
 
