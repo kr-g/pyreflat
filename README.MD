@@ -11,6 +11,11 @@ features:
 - 2-way transformation
   - from dict to flatten
   - from flaten to dict
+- 1-way transformation
+  - TerminalWriter
+    - collects all terminal values in a flat list
+  - AnynomusPathWriter
+    - where path is stripped off any index information for latter seaching on a more abstract level
 - supported types
   - bool
   - int
