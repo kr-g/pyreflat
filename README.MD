@@ -77,7 +77,8 @@ for latest, or upcoming news.
 
 with [`FlatReader`](https://github.com/kr-g/pyreflat/blob/main/pyreflat/flatter.py) 
 dict key names can not contain special character sequences, such as:
-`"/"`,`"#"`,`"!#"`,`?#"`,`?"`, or `=`
+
+- `"/"`,`"#"`,`"!#"`,`?#"`,`?"`, or `=`
 
 
 # installation
