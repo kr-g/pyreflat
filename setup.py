@@ -44,7 +44,7 @@ setuptools.setup(
             "tests",
         ]
     ),
-    keywords="python flatten dict json serialize persit config",
+    keywords="python flatten dict json serialize serialization persitence config pickel",
     install_requires=[],
     classifiers=[
         "Development Status :: 3 - Alpha",
