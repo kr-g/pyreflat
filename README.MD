@@ -11,7 +11,7 @@ features:
 - 2-way transformation
   - from dict to flatten
   - from flaten to dict
-- 1-way transformation
+- 1-way transformation (new in version v0.0.3)
   - TerminalWriter
     - collects all terminal values in a flat list
   - AnynomusPathWriter
