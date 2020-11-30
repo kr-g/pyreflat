@@ -81,6 +81,7 @@ for latest, or upcoming news.
 # limitations
 
 with [`FlatReader`](https://github.com/kr-g/pyreflat/blob/main/pyreflat/flatter.py) 
+`FlatWriter`, and [`FlatFile`](https://github.com/kr-g/pyreflat/blob/main/pyreflat/util.py)
 dict key names can not contain special character sequences. 
 
 such as:
