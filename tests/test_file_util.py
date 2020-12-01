@@ -2,7 +2,7 @@ import os
 import tempfile
 import unittest
 
-from pyreflat import FlatFile
+from pyreflat import FlatFile, TabFlatWriter, TabFlatReader
 from pyreflat.conv import Convert, ConvertHex, ConvertUTF8
 
 
@@ -112,6 +112,32 @@ class Flatten_File_TestCase(unittest.TestCase):
 
         with FlatFile(fnam, converter=ConvertUTF8) as f:
             dic = f.read()
+
+        print(dic)
+        # os.remove(fnam)
+
+        self.maxDiff = None
+
+        self.assertEqual(test_dict, dic)
+        del dic["a"]
+
+        self.assertNotEqual(test_dict, dic)
+
+    def test_4_tab_flat(self):
+
+        temp_path = tempfile.gettempdir()
+        temp_fnam = tempfile.gettempprefix() + "_flat_test.txt"
+        fnam = os.path.join(temp_path, temp_fnam)
+
+        print("fnam=", fnam)
+
+        test_dict = self.dic_data
+
+        with FlatFile(fnam, "w", converter=ConvertUTF8) as f:
+            f.write(test_dict, writer=TabFlatWriter)
+
+        with FlatFile(fnam, converter=ConvertUTF8) as f:
+            dic = f.read(reader=TabFlatReader)
 
         print(dic)
         # os.remove(fnam)

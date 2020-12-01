@@ -1,6 +1,7 @@
 from .core import DictTokenizer
 from .interp import DictIterpreter
 from .flatter import FlatWriter, FlatReader
+from .tab_flat import TabFlatWriter, TabFlatReader
 from .conv import ConvertUTF8
 
 
@@ -25,21 +26,21 @@ class FlatFile(object):
             self._fd.close()
             self._fd = None
 
-    def write(self, dic, write_nl=True):
+    def write(self, dic, write_nl=True, writer=FlatWriter):
         toknizr = DictTokenizer(emitType=True, converter=self._convert)
         toknizr.from_dict(dic)
-        writer = FlatWriter(toknizr, write_nl=write_nl)
-        writer.write(file=self._fd)
+        wrt = writer(toknizr, write_nl=write_nl)
+        wrt.write(file=self._fd)
 
-    def read(self, split_lines=True):
+    def read(self, split_lines=True, reader=FlatReader):
         content = self._fd.read()
-        reader = FlatReader()
+        rdr = reader()
         ipret = DictIterpreter(converter=self._convert)
         if split_lines:
             content = content.splitlines()
-            ipret.run_all(reader.emit_from_i(content))
+            ipret.run_all(rdr.emit_from_i(content))
         else:
-            ipret.run_all(reader.emit_from(content))
+            ipret.run_all(rdr.emit_from(content))
         return ipret.result()
 
     def __enter__(self):
