@@ -27,7 +27,7 @@ def find_projectname():
 projectname = find_projectname()
 file = os.path.join(projectname, "__init__.py")
 
-version = "v0.0.3"
+version = "v0.0.4a"
 
 setuptools.setup(
     name=projectname,
