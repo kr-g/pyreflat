@@ -90,6 +90,8 @@ such as:
 - `#[k|i|s|c|v]#` (normalzied)
 -
 
+use TabFlatWriter and TabFlatReader (new in version v0.0.4)
+
 
 # installation
     
