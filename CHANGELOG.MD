@@ -2,7 +2,7 @@
 # Changelog
 
 
-## next release v0.0.3
+## release v0.0.3
 
 - added `TerminalWriter` class for creating a list with all terminal values only (1-way transformation)
 - added `AnynomusPathWriter` class for creating a list with tupel( path, val ) pairs, where path is stripped 

@@ -16,6 +16,7 @@ features:
     - collects all terminal values in a flat list
   - AnynomusPathWriter
     - where path is stripped off any index information for latter seaching on a more abstract level
+      see also [`test_search_sorted`](https://github.com/kr-g/pyreflat/blob/main/tests/test_any_path.py)
 - supported types
   - bool
   - int
