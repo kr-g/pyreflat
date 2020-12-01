@@ -6,8 +6,10 @@
 - changed FlatFile, FlatWriter, FlatReader internal token representation to `#k#`,`#i#`,`#s#`,`#t#`,`#c#`, or `#v#` 
 - added TabFlatWriter and TabFlatReader as most readable option to persist the token stream. 
  token and terminal are written in a tab separated text file, followed by newline
-- reworked FlatFile read and write methods to accept a writer and reader parameter such as 
-  code:
+- reworked FlatFile read and write methods to accept a writer and reader paramete
+
+such as :
+
     with FlatFile(fnam, "w", converter=ConvertUTF8) as f:
         f.write(test_dict, writer=TabFlatWriter)
 
