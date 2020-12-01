@@ -43,11 +43,11 @@ code:
     fnam = "test-file.txt"
     test_dict = { "a": 1 }
 
-    with FlatFile(fnam, "w") as f:
-        f.write(test_dict)
+    with FlatFile(fnam, "w", converter=ConvertUTF8) as f:
+        f.write(test_dict, writer=TabFlatWriter)  # new in version v0.0.4
 
-    with FlatFile(fnam) as f:
-        dic = f.read()
+    with FlatFile(fnam, converter=ConvertUTF8) as f:
+        dic = f.read(reader=TabFlatReader) # new in version v0.0.4
 
 
 # how it works
