@@ -86,7 +86,9 @@ with [`FlatReader`](https://github.com/kr-g/pyreflat/blob/main/pyreflat/flatter.
 dict key names can not contain special character sequences. 
 
 such as:
-- `/`,`#`,`!#`,`?#`,`?`, or `=`
+- `#k#`,`#i#`,`#s#`,`#t#`,`#c#`, or `#v#` 
+- `#[k|i|s|c|v]#` (normalzied)
+-
 
 
 # installation

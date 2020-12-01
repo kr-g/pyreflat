@@ -3,12 +3,22 @@ import sys
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
 
-KEY_ID = "/"
-INDEX_ID = "#"
-SET_INDEX_ID = "!#"
-TUPLE_INDEX_ID = "?#"
-TERMINAL_VALUE_TYPE_ID = "?"
-TERMINAL_VALUE_ID = "="
+KEY_ID = "#k#"
+INDEX_ID = "#i#"
+SET_INDEX_ID = "#s#"
+TUPLE_INDEX_ID = "#t#"
+TERMINAL_VALUE_TYPE_ID = "#c#"
+TERMINAL_VALUE_ID = "#v#"
+
+
+_escape = [
+    KEY_ID,
+    INDEX_ID,
+    SET_INDEX_ID,
+    TUPLE_INDEX_ID,
+    TERMINAL_VALUE_TYPE_ID,
+    TERMINAL_VALUE_ID,
+]
 
 
 class Writer(object):
@@ -18,6 +28,20 @@ class Writer(object):
 
     def write(self, token, file=sys.stdout):
         print(self._decr + token.str_val(), end=self._end, file=file)
+
+
+class TerminalWriter(object):
+    def __init__(self, decor, end=""):
+        self._decr = decor
+        self._end = end
+
+    def write(self, token, file=sys.stdout):
+        print(self._decr + self.encode(token.str_val()), end=self._end, file=file)
+
+    def encode(self, astr):
+        for tok in _escape:
+            astr = astr.replace(tok, "\\" + tok)
+        return astr
 
 
 class FlatWriter(object):
@@ -37,7 +61,7 @@ class FlatWriter(object):
         self.set_writer(TerminalValueType, self._base(TERMINAL_VALUE_TYPE_ID))
         self.set_writer(
             TerminalValue,
-            self._base(TERMINAL_VALUE_ID, end=None if self._write_nl else ""),
+            TerminalWriter(TERMINAL_VALUE_ID, end=None if self._write_nl else ""),
         )
 
     def set_writer(self, token_type, writer):
@@ -106,6 +130,13 @@ class FlatReader(object):
         while pos < len(line):
             for k, trd in self._tokens:
                 if line[pos:].startswith(trd._decr):
-                    return line[:pos], line[pos:]
+                    if pos > 0:
+                        if line[pos - 1 : pos] == "\\":
+                            # escaped, cut out escape
+                            line = line[: pos - 1] + line[pos:]
+                            pos += len(trd._decr) - 1
+                            break
+                    rc = line[:pos], line[pos:]
+                    return rc
             pos += 1
         return line, ""
