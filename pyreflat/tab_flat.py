@@ -1,7 +1,6 @@
 import sys
 
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
-from pyreflat.conv import ConvertUTF8
 
 
 class TabFlatWriter(object):
@@ -54,7 +53,6 @@ class TabFlatReader(object):
 
     def emit_from(self, line):
         while len(line) > 0:
-            found = False
             fields = line.split("\t")
             for fld in fields:
                 tok_val = fld.split(":")

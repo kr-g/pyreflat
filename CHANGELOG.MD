@@ -7,7 +7,7 @@
  (key, index, set, tuple, typecast, and terminal value)
 - added TabFlatWriter and TabFlatReader as most readable option to persist the token stream. 
  token and terminal are written in a tab separated text file, followed by newline
-- reworked FlatFile read and write methods to accept a writer and reader paramete
+- reworked FlatFile read and write methods to accept a writer and reader parameter
 
 such as :
 
@@ -16,7 +16,8 @@ such as :
 
     with FlatFile(fnam, converter=ConvertUTF8) as f:
         dic = f.read(reader=TabFlatReader)
--    
+
+- 
 
 
 ## release v0.0.3

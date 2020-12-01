@@ -2,6 +2,7 @@ import os
 import tempfile
 import unittest
 
+from pyreflat.flatter import FlatWriter, FlatReader
 from pyreflat import FlatFile, TabFlatWriter, TabFlatReader
 from pyreflat.conv import Convert, ConvertHex, ConvertUTF8
 
@@ -58,11 +59,11 @@ class Flatten_File_TestCase(unittest.TestCase):
 
         test_dict = self.dic_data
 
-        with FlatFile(fnam, "w") as f:
-            f.write(test_dict)
+        with FlatFile(fnam, "w", converter=ConvertHex) as f:
+            f.write(test_dict, writer=FlatWriter)
 
-        with FlatFile(fnam) as f:
-            dic = f.read()
+        with FlatFile(fnam, converter=ConvertHex) as f:
+            dic = f.read(reader=FlatReader)
 
         os.remove(fnam)
 
@@ -82,10 +83,10 @@ class Flatten_File_TestCase(unittest.TestCase):
         test_dict = self.dic_data
 
         with FlatFile(fnam, "w", converter=ConvertHex) as f:
-            f.write(test_dict)
+            f.write(test_dict, writer=FlatWriter)
 
         with FlatFile(fnam, converter=ConvertHex) as f:
-            dic = f.read()
+            dic = f.read(reader=FlatReader)
 
         print(dic)
         os.remove(fnam)
@@ -108,10 +109,10 @@ class Flatten_File_TestCase(unittest.TestCase):
         test_dict = self.dic_data
 
         with FlatFile(fnam, "w", converter=ConvertUTF8) as f:
-            f.write(test_dict)
+            f.write(test_dict, writer=FlatWriter)
 
         with FlatFile(fnam, converter=ConvertUTF8) as f:
-            dic = f.read()
+            dic = f.read(reader=FlatReader)
 
         print(dic)
         # os.remove(fnam)

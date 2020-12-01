@@ -64,7 +64,7 @@ class TabFlatten_ReaderWriter_TestCase(unittest.TestCase):
         writer.write(file=buf)
 
         content = buf.getvalue()
-        # print(content)
+        print(content)
 
         reader = TabFlatReader()
 
