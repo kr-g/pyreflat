@@ -14,12 +14,12 @@ class DictTokenizer(object):
     def __iter__(self):
         el = []
         stack = list()
-        for t in self._it(self._dic, stack):
-            if isinstance(t, TerminalValue):
-                yield list(el), t
+        for token in self._it(self._dic, stack):
+            if isinstance(token, TerminalValue):
+                yield list(el), token
                 el.clear()
             else:
-                el.append(t)
+                el.append(token)
         if len(stack) > 0:
             raise Exception("malformed syntax")
 
