@@ -3,7 +3,7 @@
 
 ## release v0.0.4
 
-- IMPORTANT: changed FlatFile, FlatWriter, FlatReader internal token representation to `#k#`,`#i#`,`#s#`,`#t#`,`#c#`, and `#v#` 
+- **IMPORTANT**: changed FlatFile, FlatWriter, FlatReader internal token representation to `#k#`,`#i#`,`#s#`,`#t#`,`#c#`, and `#v#` 
  (key, index, set, tuple, typecast, and terminal value). **this is an incompatible change!!!**
 - added TabFlatWriter and TabFlatReader as most readable option to persist the token stream. 
  tokens and terminal value are written in a tab separated text file, followed by newline
