@@ -2,6 +2,10 @@ from .conv import Convert
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
 
+class MalformedSyntaxError(Exception):
+    pass
+
+
 class DictTokenizer(object):
     def __init__(self, emitType=True, converter=Convert):
         self._dic = {}
@@ -14,23 +18,26 @@ class DictTokenizer(object):
     def __iter__(self):
         el = []
         stack = list()
+        
         for token in self._it(self._dic, stack):
             if isinstance(token, TerminalValue):
                 yield list(el), token
                 el.clear()
             else:
                 el.append(token)
+                
         if len(stack) > 0:
-            raise Exception("malformed syntax")
+            raise MalformedSyntaxError()
 
     def _it(self, el, stack):
         for key, val in el.items():
 
             stack.append(Key(key))
 
-            if type(val) == dict:
+            typ_val = type(val)
+            if typ_val == dict:
                 yield from self._it(val, stack)
-            elif type(val) in [list, set, tuple]:
+            elif typ_val in [list, set, tuple]:
                 yield from self._it_list(val, stack)
             else:
                 yield from self._y_terminal(stack, val)
@@ -49,16 +56,18 @@ class DictTokenizer(object):
     def _it_list(self, el, stack):
         for i, val in enumerate(el):
 
-            if type(el) == list:
+            typ_el = type(el)
+            if typ_el == list:
                 stack.append(Index(i))
-            elif type(el) == set:
+            elif typ_el == set:
                 stack.append(SetIndex(i))
-            elif type(el) == tuple:
+            elif typ_el == tuple:
                 stack.append(TupleIndex(i))
 
-            if type(val) == dict:
+            typ_val = type(val)
+            if typ_val == dict:
                 yield from self._it(val, stack)
-            elif type(val) in [list, set, tuple]:
+            elif typ_val in [list, set, tuple]:
                 yield from self._it_list(val, stack)
             else:
                 yield from self._y_terminal(stack, val)
