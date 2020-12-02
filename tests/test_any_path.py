@@ -75,6 +75,7 @@ class Any_Path_TestCase(unittest.TestCase):
         path_val = self.path_val
 
         # search in all
+        # base is key "g" from the dict, followed by 2 list levels marked as "__l"
         search_for = "g__l__l"
         el_found = filter(lambda x: x[0] == search_for, path_val)
         el = list(map(lambda x: x[1], el_found))
@@ -95,6 +96,7 @@ class Any_Path_TestCase(unittest.TestCase):
         print("vals", vals)
 
         # search in sorted
+        # base is key "g" from the dict, followed by 2 list levels marked as "__l"
         search_for = "g__l__l"
         idx = bisect.bisect_left(keys, search_for)
         found = []
