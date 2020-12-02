@@ -7,9 +7,8 @@ class MalformedSyntaxError(Exception):
 
 
 class DictTokenizer(object):
-    def __init__(self, emitType=True, converter=Convert):
+    def __init__(self, converter=Convert):
         self._dic = {}
-        self.emitType = emitType
         self._converter = converter
 
     def from_dict(self, dic):
@@ -18,14 +17,14 @@ class DictTokenizer(object):
     def __iter__(self):
         el = []
         stack = list()
-        
+
         for token in self._it(self._dic, stack):
             if isinstance(token, TerminalValue):
                 yield list(el), token
                 el.clear()
             else:
                 el.append(token)
-                
+
         if len(stack) > 0:
             raise MalformedSyntaxError()
 
@@ -46,8 +45,7 @@ class DictTokenizer(object):
 
     def _y_terminal(self, stack, val):
         yield from stack
-        if self.emitType:
-            yield TerminalValueType(val.__class__.__name__)
+        yield TerminalValueType(val.__class__.__name__)
         if type(val) == str:
             yield TerminalValue(self._converter().encode(str(val)))
         else:

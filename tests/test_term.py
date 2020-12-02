@@ -39,7 +39,7 @@ TOTAL_TERMINAL_VALUES_IN_SAMPLE = 45
 class Flatten_TestCase(unittest.TestCase):
     def test_null_list(self):
 
-        toknizr = DictTokenizer(emitType=True)
+        toknizr = DictTokenizer()
         toknizr.from_dict(test_dict)
 
         trmwr = TerminalWriter(toknizr)
@@ -51,7 +51,7 @@ class Flatten_TestCase(unittest.TestCase):
 
     def test_with_list_provided(self):
 
-        toknizr = DictTokenizer(emitType=True)
+        toknizr = DictTokenizer()
         toknizr.from_dict(test_dict)
 
         trmwr = TerminalWriter(toknizr)

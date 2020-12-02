@@ -27,7 +27,7 @@ class FlatFile(object):
             self._fd = None
 
     def write(self, dic, write_nl=True, writer=FlatWriter):
-        toknizr = DictTokenizer(emitType=True, converter=self._convert)
+        toknizr = DictTokenizer(converter=self._convert)
         toknizr.from_dict(dic)
         wrt = writer(toknizr, write_nl=write_nl)
         wrt.write(file=self._fd)

@@ -37,7 +37,7 @@ test_dict = {
 class Flatten_TestCase(unittest.TestCase):
     def test_1(self):
 
-        toknizr = DictTokenizer(emitType=True)
+        toknizr = DictTokenizer()
         toknizr.from_dict(test_dict)
 
         fltwr = FlatWriter(toknizr, write_nl=True)

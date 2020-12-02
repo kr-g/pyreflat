@@ -39,7 +39,7 @@ TOTAL_TERMINAL_VALUES_IN_SAMPLE = 45
 class Any_Path_base_TestCase(unittest.TestCase):
     def test_writer(self):
 
-        toknizr = DictTokenizer(emitType=True)
+        toknizr = DictTokenizer()
         toknizr.from_dict(test_dict)
 
         trmwr = AnynomusPathWriter(toknizr)
@@ -51,7 +51,7 @@ class Any_Path_base_TestCase(unittest.TestCase):
 class Any_Path_TestCase(unittest.TestCase):
     def setUp(self):
 
-        toknizr = DictTokenizer(emitType=True)
+        toknizr = DictTokenizer()
         toknizr.from_dict(test_dict)
 
         trmwr = AnynomusPathWriter(toknizr)

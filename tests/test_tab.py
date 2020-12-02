@@ -55,7 +55,7 @@ class TabFlatten_ReaderWriter_TestCase(unittest.TestCase):
 
         test_dict = self.dic_data
 
-        toknizr = DictTokenizer(emitType=True, converter=ConvertUTF8)
+        toknizr = DictTokenizer(converter=ConvertUTF8)
         toknizr.from_dict(test_dict)
 
         writer = TabFlatWriter(toknizr)

@@ -1,6 +1,13 @@
 
 # Changelog
 
+
+## next release v0.0.5
+
+- dropped `DictTokenizer` init parameter emitType=True. `TerminalValueType` is now always send to the stream
+- 
+
+
 ## release v0.0.4
 
 - **IMPORTANT**: changed FlatFile, FlatWriter, FlatReader internal token representation to `#k#`,`#i#`,`#s#`,`#t#`,`#c#`, and `#v#` 
