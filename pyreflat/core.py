@@ -1,4 +1,4 @@
-from .conv import Convert
+from .conv import ConvertUTF8
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
 
@@ -7,7 +7,7 @@ class MalformedSyntaxError(Exception):
 
 
 class DictTokenizer(object):
-    def __init__(self, converter=Convert):
+    def __init__(self, converter=ConvertUTF8):
         self._dic = {}
         self._converter = converter
 
