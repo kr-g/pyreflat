@@ -46,6 +46,8 @@ class Flatten_TestCase(unittest.TestCase):
 
         terminal_values = trmwr.write()
 
+        print("terminal_values", terminal_values)
+
         # numbers of terminal values in the example abode
         self.assertEqual(len(terminal_values), TOTAL_TERMINAL_VALUES_IN_SAMPLE)
 
