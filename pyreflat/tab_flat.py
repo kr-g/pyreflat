@@ -6,27 +6,23 @@ from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, Termina
 class TabFlatWriter(object):
     def __init__(self, flatdict, write_nl=True):
         self._flt = flatdict
-        self._fd = sys.stdout
-        self._map = {}
-        # self._write_nl = write_nl
-
-    def set_writer(self, token_type, writer):
-        self._map[token_type] = writer
+        # for compatibility,
+        # ##todo rework interface
+        self._write_nl = write_nl
 
     def write(self, file=sys.stdout):
-        self._fd = file
 
         for tokens in self._flt:
             path, val = tokens
             for pr in path:
-                self._fd.write(pr.__class__.__name__)
-                self._fd.write(":")
-                self._fd.write(str(pr.val))
-                self._fd.write("\t")
-            self._fd.write(val.__class__.__name__)
-            self._fd.write(":")
-            self._fd.write(str(val.val))
-            self._fd.write("\n")
+                file.write(pr.__class__.__name__)
+                file.write(":")
+                file.write(str(pr.val))
+                file.write("\t")
+            file.write(val.__class__.__name__)
+            file.write(":")
+            file.write(str(val.val))
+            file.write("\n")
 
 
 class TabReader(object):
