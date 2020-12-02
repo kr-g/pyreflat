@@ -25,27 +25,21 @@ class TabFlatWriter(object):
             file.write("\n")
 
 
-class TabReader(object):
-    def __init__(self, token_type):
-        self._type = token_type
-        self._nam = token_type.__name__
-
-
 class TabFlatReader(object):
     def __init__(self):
         self._map = {}
         self._set_defaults()
 
     def _set_defaults(self):
-        self.set_reader(TabReader(Key))
-        self.set_reader(TabReader(Index))
-        self.set_reader(TabReader(SetIndex))
-        self.set_reader(TabReader(TupleIndex))
-        self.set_reader(TabReader(TerminalValue))
-        self.set_reader(TabReader(TerminalValueType))
+        self.set_reader(Key)
+        self.set_reader(Index)
+        self.set_reader(SetIndex)
+        self.set_reader(TupleIndex)
+        self.set_reader(TerminalValue)
+        self.set_reader(TerminalValueType)
 
-    def set_reader(self, reader):
-        self._map[reader._nam] = reader
+    def set_reader(self, token):
+        self._map[token.__name__] = token
 
     def emit_from(self, line):
         while len(line) > 0:
@@ -57,7 +51,7 @@ class TabFlatReader(object):
                 tok, val = tok_val
                 if tok not in self._map:
                     raise Exception("unknown token", line[0:10] + "...")
-                token = self._map[tok]._type(val)
+                token = self._map[tok](val)
                 yield token
             line = ""
 
