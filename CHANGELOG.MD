@@ -1,7 +1,7 @@
 
 # Changelog
 
-## next release v0.0.4
+## release v0.0.4
 
 - IMPORTANT: changed FlatFile, FlatWriter, FlatReader internal token representation to `#k#`,`#i#`,`#s#`,`#t#`,`#c#`, and `#v#` 
  (key, index, set, tuple, typecast, and terminal value). **this is an incompatible change!!!**
