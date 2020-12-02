@@ -7,7 +7,7 @@
 - dropped `DictTokenizer` init parameter emitType=True. `TerminalValueType` is now always send to the stream
 - refactored for reability, and lower complexity. some configuration options where dropped. 
  writing and reading a token from/to a stream is quite simple. it makes no sense to introduce generic approaches here.
-- changed `DictTokenizer` default converter to `ConvertUTF8`
+- changed `DictTokenizer` and `DictIterpreter` default converter to `ConvertUTF8`
 - 
 
 

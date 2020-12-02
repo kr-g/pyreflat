@@ -1,4 +1,4 @@
-from .conv import Convert
+from .conv import ConvertUTF8
 from .tokens import Key, Index, SetIndex, TupleIndex, TerminalValueType, TerminalValue
 
 
@@ -86,7 +86,7 @@ class KeyCmd(Command):
 
 
 class DictIterpreter(object):
-    def __init__(self, converter=Convert):
+    def __init__(self, converter=ConvertUTF8):
         self.reset()
         self._stack = list()
         self._map = {}

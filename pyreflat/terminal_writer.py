@@ -1,4 +1,5 @@
 from .tokens import TerminalValue
+from .core import MalformedSyntaxError
 
 
 class TerminalWriter(object):
@@ -12,6 +13,8 @@ class TerminalWriter(object):
 
         for tokens in self._flt:
             path, terminal = tokens
+            if type(terminal) != TerminalValue:
+                raise MalformedSyntaxError()
             output.append(terminal.val)
 
         return output
