@@ -2,7 +2,7 @@
 # Changelog
 
 
-## next release v0.0.5
+## release v0.0.5
 
 - dropped `DictTokenizer` init parameter emitType=True. `TerminalValueType` is now always send to the stream
 - refactored for reability, and lower complexity. some configuration options where dropped. 
