@@ -75,7 +75,7 @@ Tested on Python3, and Linux.
 alpha state.
 the API or logical call flow might change without prior notice.
 
-read [`CHANGELOG`](https://github.com/kr-g/pyreflat/blob/master/CHANGELOG.MD)
+read [`CHANGELOG`](https://github.com/kr-g/pyreflat/blob/main/CHANGELOG.MD)
 for latest, or upcoming news.
 
 
