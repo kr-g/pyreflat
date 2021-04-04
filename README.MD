@@ -59,7 +59,7 @@ the tokens can later send to an interpreter for constructing the former dict aga
 
 use REPL to find out more:
 
-    toknizr = DictTokenizer(emitType=True)
+    toknizr = DictTokenizer()
     toknizr.from_dict({"a":1,"b":2.0,"c":[1,2,3],"d":[ [1], [2,2], [3,3,3] ]})
 
     alltokens = list(toknizr)  # iterator result as list
