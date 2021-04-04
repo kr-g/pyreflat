@@ -41,7 +41,7 @@ d = {
     "done": True,
 }
 
-toknizr = DictTokenizer(emitType=True, converter=ConvertHex)
+toknizr = DictTokenizer(converter=ConvertHex)
 toknizr.from_dict(d)
 
 alltokens = list(toknizr)  # iterator result as list
