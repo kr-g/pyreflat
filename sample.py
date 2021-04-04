@@ -44,7 +44,10 @@ d = {
 toknizr = DictTokenizer(converter=ConvertHex)
 toknizr.from_dict(d)
 
+print("-" * 7)
 alltokens = list(toknizr)  # iterator result as list
+print("alltokens", alltokens)
+print("-" * 7)
 
 fltwr = FlatWriter(
     toknizr,  # iterable, or use alltokens here as parameter
